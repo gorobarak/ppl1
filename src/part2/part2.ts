@@ -31,7 +31,6 @@ export const group_letters = (word: string) : string[][] => R.groupWith(R.equals
 export const reducer_q2 = (acc:string, curr: string[]) : string => R.length(curr) === 1 ? 
                 R.concat(acc, curr[0]) : R.concat(acc, R.concat(curr[0], R.toString(R.length(curr))));
 
-//console.log(runLengthEncoding("asdfaasd"));
 
 /* Question 3 */
 export const isPaired = (text: string) : boolean => remove_all(keep_brackets(text));
