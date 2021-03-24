@@ -36,10 +36,13 @@ export const reducer_q2 = (acc:string, curr: string[]) : string => R.length(curr
 /* Question 3 */
 export const isPaired = (text: string) : boolean => remove_all(keep_brackets(text));
 
-export const remove_all = (text: string) : boolean => text.length === 0 ?                                   //no parantheses remaining
-                                                    true : text.length % 2 === 1 ?                               //odd amount of parantheses remaining
-                                                    false : remove_touching(text).length === text.length ?   //no more parantheses to remove
+export const remove_all = (text: string) : boolean => {
+                                                    const len = R.length(stringToArray(text));
+                                                    return len === 0 ?                                   //no parantheses remaining
+                                                    true :len % 2 === 1 ?                               //odd amount of parantheses remaining
+                                                    false : R.length(stringToArray(remove_touching(text))) === len ?   //no more parantheses to remove
                                                     false : remove_all(remove_touching(text));              //removed parantheses, keep checking
+}
 
 export const is_openning = (c: string) : boolean => (c === "(") || (c === "[") || (c === "{"); //checks wether an opening bracket
 export const is_closing = (c: string) : boolean => (c === ")") || (c === "]") || (c === "}"); //checks wether a closing bracket
