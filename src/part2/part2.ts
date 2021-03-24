@@ -34,13 +34,11 @@ export const reducer_q2 = (acc:string, curr: string[]) : string => R.length(curr
 //console.log(runLengthEncoding("asdfaasd"));
 
 /* Question 3 */
-export const isPaired = (text: string) : boolean => (keep_brackets(text).length === 0 ? true :     //no parantheses at all
-                                                    keep_brackets(text).length % 2 !== 0 ? false : //odd amount of parantheses
-                                                    remove_all(keep_brackets(text)));
+export const isPaired = (text: string) : boolean => remove_all(keep_brackets(text));
 
 export const remove_all = (text: string) : boolean => text.length === 0 ?                                   //no parantheses remaining
-                                                    true : text.length ===1 ?                               //odd amount of parantheses remaining
-                                                    false : remove_touching(text).length == text.length ?   //no more parantheses to remove
+                                                    true : text.length % 2 === 1 ?                               //odd amount of parantheses remaining
+                                                    false : remove_touching(text).length === text.length ?   //no more parantheses to remove
                                                     false : remove_all(remove_touching(text));              //removed parantheses, keep checking
 
 export const is_openning = (c: string) : boolean => (c === "(") || (c === "[") || (c === "{"); //checks wether an opening bracket
@@ -48,8 +46,3 @@ export const is_closing = (c: string) : boolean => (c === ")") || (c === "]") ||
 export const is_bracket = (c: string) : boolean => (is_openning(c) || is_closing(c));
 export const keep_brackets = (s: string) : string => R.join("", R.filter(is_bracket, stringToArray(s))); //returns only parantheses from a string
 export const remove_touching = (s: string) : string => R.replace(/\(\)|\[\]|\{\}/g, '', s); //removes all adjacent paranteses - ()[]{}
-//export const remove2 = (s: string) : string => R.without(["[]","{}","()"], s);
-console.log(remove_touching("[]]](){}}{"));
-
-//console.log(keep_brackets("((asdf)asdf{}"));
-TESTING COMMIT
