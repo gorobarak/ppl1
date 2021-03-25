@@ -37,10 +37,10 @@ export const isPaired = (text: string) : boolean => remove_all(keep_brackets(tex
 
 export const remove_all = (text: string) : boolean => {
                                                     const len = R.length(stringToArray(text));
-                                                    return len === 0 ?                                   //no parantheses remaining
-                                                    true :len % 2 === 1 ?                               //odd amount of parantheses remaining
-                                                    false : R.length(stringToArray(remove_touching(text))) === len ?   //no more parantheses to remove
-                                                    false : remove_all(remove_touching(text));              //removed parantheses, keep checking
+                                                    return len === 0 ?                                                  //no parantheses remaining
+                                                    true :len % 2 === 1 ?                                               //odd amount of parantheses remaining
+                                                    false : R.length(stringToArray(remove_touching(text))) === len ?    //no more parantheses to remove
+                                                    false : remove_all(remove_touching(text));                          //removed parantheses, keep checking
 }
 
 export const is_openning = (c: string) : boolean => (c === "(") || (c === "[") || (c === "{"); //checks wether an opening bracket

@@ -4,7 +4,7 @@ import * as R from "ramda";
 export type Queue = number[];
 
 export const enqueue = (x: number): State<Queue,undefined> => {
-    return (Q: Queue) => [R.concat(Q, [x]) , undefined]; //add number to the end of the array
+    return (Q: Queue) => [R.concat(Q, [x]) , undefined];        //add number to the end of the array
 };
 
 export const dequeue = (Q: Queue): [Queue, number] => {

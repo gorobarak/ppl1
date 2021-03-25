@@ -1,4 +1,5 @@
 import { Result, makeFailure, makeOk, bind, either } from "../lib/result";
+import * as R from "ramda";
 
 /* Library code */
 const findOrThrow = <T>(pred: (x: T) => boolean, a: T[]): T => {
@@ -9,12 +10,14 @@ const findOrThrow = <T>(pred: (x: T) => boolean, a: T[]): T => {
 }
 
 export const findResult =  <T>(pred: (x: T) => boolean, a: T[]): Result<T> => {
-    try {
-        const x = findOrThrow(pred, a);
-        return makeOk(x);
-    } catch (e) {
-        return makeFailure("no such element exists");
-    }
+    return R.not(R.any(pred)(a)) ? makeFailure("no such element exists") :
+            makeOk(R.filter(pred, a)[0]); 
+    // try {
+    //     const x = findOrThrow(pred, a);
+    //     return makeOk(x);
+    // } catch (e) {
+    //     return makeFailure("no such element exists");
+    // }
 };
 
 /* Client code */
